@@ -1,0 +1,25 @@
+<form class="form-inline">
+
+  <input type="text" name="searchInput" class="form-control" placeholder="Search..." #searchInput="ngModel" [(ngModel)]="searchText" style="width: 80%;">
+  <button class="btn btn-primary" (click)="searchText=''">X</button>
+</form>
+<table class="table table-lg">
+  <thead>
+    <th>Fullname</th>
+    <th>Email</th>
+    <th>Mobile</th>
+  </thead>
+  <ng-container *ngFor="let customer of customerArray">
+    <tr class="table" *ngIf="filterCondition(customer)">
+      <td>{{ customer.fullname }}</td>
+      <td>{{ customer.email }}</td>
+      <td>{{ customer.mobile }}</td>
+
+      <td>
+        <button class="btn btn-warning" (click)="customerService.populateForm(customer)">Edit</button>
+        &nbsp; &nbsp;
+        <button class="btn btn-danger" (click)="onDelete(customer.$key)">Delete</button>
+      </td>
+    </tr>
+  </ng-container>
+</table>
